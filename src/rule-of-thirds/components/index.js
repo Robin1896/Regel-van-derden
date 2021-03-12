@@ -149,7 +149,7 @@ return (
             <div className="rule-of-thirds__image__gridoverlay__item" style={{paddingLeft : this.state.x4, paddingTop: this.state.y4}}><div className="rule-of-thirds__image__gridoverlay__item__point"></div></div>
             <div className="rule-of-thirds__image__gridoverlay__item" style={{paddingLeft : this.state.objectx*this.state.width, paddingTop: this.state.objecty*this.state.height}}><div className="rule-of-thirds__image__gridoverlay__item__point">center object</div></div>
         </div>
-        <img ref={this.dimensions} src={this.state.base64} />
+        <img ref={this.dimensions} src={this.state.base64} alt="afbeelding" />
     </div>
     <label for="fname">Aantal downloads:</label>
     <input type="text" onChange={this.handleDownload} id="downloads" name="fname"></input>
