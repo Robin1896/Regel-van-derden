@@ -31,6 +31,14 @@ class RuleOfThirds extends React.Component {
         DistanceToPointB: [],
         DistanceToPointC: [],
         DistanceToPointD: [],
+        x1Perc: [],
+        y1Perc: [],
+        x2Perc: [],
+        y2Perc: [],
+        x3Perc: [],
+        y3Perc: [],
+        x4Perc: [],
+        y4Perc: [],
     };
     }
 
@@ -110,15 +118,24 @@ class RuleOfThirds extends React.Component {
             y3 : ((this.dimensions.current.offsetHeight / 3) * 2)-9,
             x4 : ((this.dimensions.current.offsetWidth / 3) * 2)-9,
             y4 : ((this.dimensions.current.offsetHeight / 3) * 2)-9,
+
         });
     }
 
     setDistance() {
         this.setState({
-            DistanceToPointA :  Math.sqrt(Math.pow((this.state.objectx*this.state.width - this.state.x1), 2) + Math.pow((this.state.objecty*this.state.height - this.state.y1), 2)),
-            DistanceToPointB :  Math.sqrt(Math.pow((this.state.objectx*this.state.width - this.state.x2), 2) + Math.pow((this.state.objecty*this.state.height - this.state.y2), 2)),
-            DistanceToPointC :  Math.sqrt(Math.pow((this.state.objectx*this.state.width - this.state.x3), 2) + Math.pow((this.state.objecty*this.state.height - this.state.y3), 2)),
-            DistanceToPointD :  Math.sqrt(Math.pow((this.state.objectx*this.state.width - this.state.x4), 2) + Math.pow((this.state.objecty*this.state.height - this.state.y4), 2)),
+            DistanceToPointA :  Math.sqrt(Math.pow((this.state.objectx*this.state.width - this.state.x1), 2) + Math.pow((this.state.objecty*this.state.height - this.state.y1), 2)).toFixed(2),
+            DistanceToPointB :  Math.sqrt(Math.pow((this.state.objectx*this.state.width - this.state.x2), 2) + Math.pow((this.state.objecty*this.state.height - this.state.y2), 2)).toFixed(2),
+            DistanceToPointC :  Math.sqrt(Math.pow((this.state.objectx*this.state.width - this.state.x3), 2) + Math.pow((this.state.objecty*this.state.height - this.state.y3), 2)).toFixed(2),
+            DistanceToPointD :  Math.sqrt(Math.pow((this.state.objectx*this.state.width - this.state.x4), 2) + Math.pow((this.state.objecty*this.state.height - this.state.y4), 2)).toFixed(2),
+            x1Perc :  ((this.state.objectx*this.state.width - this.state.x1) / this.state.width)*100,
+            y1Perc : ((this.state.objecty*this.state.height - this.state.y1)/this.state.width)*100,
+            x2Perc :  ((this.state.objectx*this.state.width - this.state.x2) / this.state.width)*100,
+            y2Perc : ((this.state.objecty*this.state.height - this.state.y2)/this.state.width)*100,
+            x3Perc :  ((this.state.objectx*this.state.width - this.state.x3) / this.state.width)*100,
+            y3Perc : ((this.state.objecty*this.state.height - this.state.y3)/this.state.width)*100,
+            x4Perc :  ((this.state.objectx*this.state.width - this.state.x4) / this.state.width)*100,
+            y4Perc : ((this.state.objecty*this.state.height - this.state.y4)/this.state.width)*100,
         })
     }
 
@@ -138,6 +155,7 @@ uploadToDataBase() {
 }
 
 render() {
+    console.log((this.state.y1Perc+ "test"))
     
 return (
 <div className="rule-of-thirds">
@@ -151,17 +169,19 @@ return (
         </div>
         <img ref={this.dimensions} src={this.state.base64} alt="afbeelding" />
     </div>
-    <label for="fname">Aantal downloads:</label>
-    <input type="text" onChange={this.handleDownload} id="downloads" name="fname"></input>
-    <br />
-    <label for="fname">Aantal keren bekeken:</label>
-    <input type="text" onChange={this.handleView} id="views" name="fname"></input>
+
     <p>Breedte: {this.state.width}</p>
     <p>Hoogte: {this.state.height}</p>
+
     <p>Afstand tot Punt 1:  { this.state.DistanceToPointA} px</p>
+    <p>Afstand tot Punt 1 %:  {Math.sqrt(Math.pow((this.state.x1Perc), 2)+ Math.pow((this.state.y1Perc), 2)).toFixed(2)} %</p>
     <p>Afstand tot Punt 2:  { this.state.DistanceToPointB} px</p>
-    <p>Afstand tot Punt 3: { this.state.DistanceToPointC} px</p>
+    <p>Afstand tot Punt 2 %:  {Math.sqrt(Math.pow((this.state.x2Perc), 2)+ Math.pow((this.state.y2Perc), 2)).toFixed(2)} %</p>
+    <p>Afstand tot Punt 3:  { this.state.DistanceToPointC} px</p>
+    <p>Afstand tot Punt 3 %:  {Math.sqrt(Math.pow((this.state.x3Perc), 2)+ Math.pow((this.state.y3Perc), 2)).toFixed(2)} %</p>
     <p>Afstand tot Punt 4:  { this.state.DistanceToPointD} px</p>
+    <p>Afstand tot Punt 4 %:  {Math.sqrt(Math.pow((this.state.x4Perc), 2)+ Math.pow((this.state.y4Perc), 2)).toFixed(2)} %</p>
+
     <br />
     <button onClick={this.handleSubmit}>Save</button>
     <input className="filetest" type="file" onChange={(e)=> {
